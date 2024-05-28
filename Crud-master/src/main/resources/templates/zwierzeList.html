@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Zwierząt</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container mt-4">
+    <h2>Lista Zwierząt</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Id Gatunku</th>
+            <th>Imię</th>
+            <th>Id Pracownika</th>
+            <th>Wiek (miesiące)</th>
+            <th>Płeć</th>
+            <th>Id Pawilonu</th>
+            <th>Akcje</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="zwierze : ${zwierzeList}">
+            <td th:text="${zwierze.id_zwierzaka}"></td>
+            <td>
+            <a th:href="@{/Gatunek}" th:text="${zwierze.gatunek.id_gatunku}"></a>
+            </td>
+            <td th:text="${zwierze.imie}"></td>
+            <td>
+                <a th:href="@{/pracownik}" th:text="${zwierze.pracownik != null ? zwierze.pracownik.id_pracownika : 'Brak danych'}"></a>
+            </td>
+            <td th:text="${zwierze.wiekM.intValue()}"></td>
+            <td th:text="${zwierze.plec}"></td>
+            <td>
+                <a th:href="@{/Pawilon}" th:text="${zwierze.pawilon.id_pawilonu}"></a>
+            </td>
+            <td>
+                <a th:href="@{'/editZwierze/' + ${zwierze.id_zwierzaka}}" class="btn btn-primary btn-sm">Edycja</a>
+                <a th:href="@{'/deleteZwierze/' + ${zwierze.id_zwierzaka}}" class="btn btn-danger btn-sm">Usuń</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/newZwierze}" class="btn btn-success">Dodaj</a>
+    <a th:href="@{/}" class="btn btn-success">Panel główny</a>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+        integrity="sha384-XCEx+Z9pFWj2wblQHVnU14CNU8F5+KGJpHCF8eXolnDzU13egCffGPOeIJSq1TwD"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6uLbBl6S/BqE6JZnMxImV9ZG1WNRtE+ApA4d1"
+        crossorigin="anonymous"></script>
+</body>
+</html>

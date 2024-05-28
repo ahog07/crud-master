@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nowe Zwierze</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container mt-4">
+    <h2>Nowe Zwierze</h2>
+    <form th:action="@{/saveZwierze}" th:object="${zwierze}" method="post">
+        <div class="form-group">
+            <label for="gatunek">Gatunek:</label>
+            <select class="form-control" id="gatunek" th:field="*{gatunek.id_gatunku}" required>
+                <option th:each="gatunek: ${listaGatunkow}" th:value="${gatunek.id_gatunku}" th:text="${gatunek.nazwa}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="imie">Imię:</label>
+            <input type="text" class="form-control" id="imie" th:field="*{imie}" required>
+        </div>
+        <div class="form-group">
+            <label for="pracownik">Pracownik:</label>
+            <select class="form-control" id="pracownik" th:field="*{pracownik.id_pracownika}" required>
+                <option th:each="pracownik : ${listaPracownik}" th:value="${pracownik.id_pracownika}" th:text="${pracownik.imie + ' ' + pracownik.nazwisko}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="wiekM">Wiek (miesiące):</label>
+            <input type="number" class="form-control" id="wiekM" th:field="*{wiekM}" required>
+        </div>
+        <div class="form-group">
+            <label for="plec">Płeć:</label>
+            <!-- <input type="text" class="form-control" id="plec" th:field="*{plec}" required> -->
+             <select name="plec" value="--Prosze wybrać pozycję--"class="form-control" id="plec"th:field="*{plec}">
+                <option value="">--Wybierz z listy--
+                    <option value="M">M</option>
+                    <option value="K">K</option>
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="pawilon">Pawilon:</label>
+            <select class="form-control" id="pawilon" th:field="*{pawilon.id_pawilonu}" required>
+                <option value="">--Wybierz z listy--
+                <option th:each="pawilon: ${listaPawilon}" th:value="${pawilon.id_pawilonu}" th:text="${pawilon.nazwa}"></option>
+                </option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Zapisz</button>
+        <a th:href="@{/Zwierze}" class="btn btn-secondary">Anuluj</a>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+        integrity="sha384-XCEx+Z9pFWj2wblQHVnU14CNU8F5+KGJpHCF8eXolnDzU13egCffGPOeIJSq1TwD"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6uLbBl6S/BqE6JZnMxImV9ZG1WNRtE+ApA4d1"
+        crossorigin="anonymous"></script>
+</body>
+</html>
